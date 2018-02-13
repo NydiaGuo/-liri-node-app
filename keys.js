@@ -1,29 +1,10 @@
 console.log('this is loaded');
-var omdKey = "4f09a22c";
-
-//OMDb API: http://www.omdbapi.com/?i=tt3896198&apikey=4f09a22c
 
 var twitterKeys = {
-  consumer_key: '<input here>',
-  consumer_secret: '<input here>',
-  access_token_key: '<input here>',
-  access_token_secret: '<input here>',
+  consumer_key: '4kJ3tQ2aW9G6y3NOcIXZ0pMBZ',
+  consumer_secret: 'G0m3SSsey6KBKCd6wioerClfrpneRapgr8PQdHCLWBTKK8g2D8',
+  access_token_key: '962123307221790721-t7SOF9oDoa1uXVUGNl9FqeR4imfH2N9',
+  access_token_secret: 'pPwnHzDRskPI2apMSIeKQFifH4FbxcPhf1hzahstXoa43',
 }
 
 module.exports = twitterKeys;
-
-// var Twitter = require('twitter');
- 
-// var client = new Twitter({
-//   consumer_key: '',
-//   consumer_secret: '',
-//   access_token_key: '',
-//   access_token_secret: ''
-// });
- 
-// var params = {screen_name: 'nodejs'};
-// client.get('statuses/user_timeline', params, function(error, tweets, response) {
-//   if (!error) {
-//     console.log(tweets);
-//   }
-// });
