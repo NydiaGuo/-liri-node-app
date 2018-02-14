@@ -8,3 +8,8 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI will be a comm
 - [Node](https://nodejs.org/en/)
 - [JSON](https://www.json.org/)
 - [NPM](https://www.npmjs.com/)
+
+# APIs
+- [Twitter](https://apps.twitter.com/)
+- [Spotify](https://developer.spotify.com/)
+- [OMDb](http://www.omdbapi.com/)
