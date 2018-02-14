@@ -5,9 +5,10 @@ var request = require("request");
 var Spotify = require('node-spotify-api');
 var nodeArgs = process.argv;
 var Twitter = require("twitter");
+//Get the twitter's keys from another file
 var twitter = require("./keys.js");
 
-// Grab the uer's input for which case they will pick
+//Get the users input info to trigger the right funtion
 switch (userInput) {
 	case "movie-this":
 		movie();
@@ -25,16 +26,21 @@ switch (userInput) {
 
 //Do what it says function
 function doTheSays() {
+	//read the text from random file
 	fs.readFile("random.txt","utf8", function(err, data) {
+		//if there are some errors, log the errors
 		if (err) {
 			return console.log(error);
+		//otherwise run the info
 		} else {
-			//console.log(data);
 			var dataArr = data.split(",");
-			//sign the user input
+			//sign the user input in dataArr
 			userInput = dataArr[0];
+			//put two empty strings in the dataArr
 			dataArr.splice(1, 0, "", "");
+			//sign the new dataArr contains with empty strings to nodeArgs 
 			nodeArgs = dataArr;
+			//Get the users input info to trigger the right funtion
 			switch (userInput) {
 				case "movie-this":
 					movie();
