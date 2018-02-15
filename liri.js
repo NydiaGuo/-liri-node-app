@@ -1,5 +1,6 @@
 //Core node package of reading and writing files
 var fs = require("fs");
+//creat a varible to get the user input
 var userInput = process.argv[2];
 var request = require("request");
 var Spotify = require('node-spotify-api');
@@ -34,7 +35,7 @@ function doTheSays() {
 		//otherwise run the info
 		} else {
 			var dataArr = data.split(",");
-			//sign the user input in dataArr
+			//sign the user input as the dataArr's first index
 			userInput = dataArr[0];
 			//put two empty strings in the dataArr
 			dataArr.splice(1, 0, "", "");
@@ -55,9 +56,22 @@ function doTheSays() {
 					doTheSays();
 					break;
 			}
+
 		}
 	});
+	//append the results to log file
+	fs.appendFile(
+		"log.txt", "", function(err) {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			console.log("You added your info!");
+		}
+	});
+
 }
+
 //Spotify function
 function spotify() {
 
@@ -91,12 +105,26 @@ function spotify() {
 			console.log("the song's name: " + data.tracks.items[0].name);
 		 	console.log("the link of the song: " + data.tracks.items[0].preview_url); 
 		 	console.log("the song is from this album: " + JSON.stringify(data.tracks.items[0].album, null, 2));
+		 	//append the results to log file
+			fs.appendFile(
+				"log.txt", "\n--------------------------------------------------------------------------------" +
+				"\nthe artist: " + data.tracks.items[0].artists[0].name + 
+				"\nthe song's name: " + data.tracks.items[0].name + 
+				"\nthe link of the song: " + data.tracks.items[0].preview_url +
+				"\nthe song is from this album: " + JSON.stringify(data.tracks.items[0].album, null, 2), function(err) {
+				if (err) {
+					console.log(err);
+				}
+				else {
+					console.log("You added your info!");
+				}
+
+			});
 		//if it has errors, log the error messages
 		} else {
-		 return console.log('Error occurred: ' + err);
+			return console.log('Error occurred: ' + err);
 		}
 	});
-
 }
 
 //twitter function
@@ -114,6 +142,18 @@ function tweets() {
 			for (var i = 0; i < 10; i++) {
 				console.log(tweets[i].created_at);
 				console.log(tweets[i].text);
+				//append the results to log file
+				fs.appendFile(
+					"log.txt", "\n-----------------------------------------------" + 
+					"\nthis is my twitter time: " + tweets[i].created_at + 
+					"\nthis is my tweets: " + tweets[i].text, function(err) {
+					if (err) {
+						console.log(err);
+					}
+					else {
+						console.log("You added your info!");
+					}
+				});
 			}
 		}
 	});
@@ -144,14 +184,34 @@ function movie() {
 	request(queryUrl, function(error, response, body) {
 		// If the request is successful, log the info
 		if (!error && response.statusCode === 200) {
-			console.log("the name of the movie: " + JSON.parse(body).Title);
-			console.log("Year the movie came out: " + JSON.parse(body).Year);
-			console.log("IMBD rating of the movie: " + JSON.parse(body).Rated);
-			console.log("Rotten tomatoes rating of the movie: " + JSON.parse(body).Ratings[2].Value);
-			console.log("Country of the movie was produced: " + JSON.parse(body).Country);
-			console.log("Language of the movie: " + JSON.parse(body).Language);
-			console.log("Plot of the movie: " + JSON.parse(body).Plot);
-			console.log("Actors in the movie: " + JSON.parse(body).Actors);
+			console.log(
+				"\nthe name of the movie: " + JSON.parse(body).Title +
+				"\nYear the movie came out: " + JSON.parse(body).Year +
+				"\nIMBD rating of the movie: " + JSON.parse(body).Rated +
+				"\nRotten tomatoes rating of the movie: " + JSON.parse(body).Ratings[2].Value +
+				"\nCountry of the movie was produced: " + JSON.parse(body).Country +
+				"\nLanguage of the movie: " + JSON.parse(body).Language +
+				"\nPlot of the movie: " + JSON.parse(body).Plot +
+				"\nActors in the movie: " + JSON.parse(body).Actors);
+
+			//append the results to log file
+			fs.appendFile(
+				"log.txt", "\n-------------------------------------------------" +
+				"\nthe name of the movie: " + JSON.parse(body).Title +
+				"\nYear the movie came out: " + JSON.parse(body).Year +
+				"\nIMBD rating of the movie: " + JSON.parse(body).Rated +
+				"\nRotten tomatoes rating of the movie: " + JSON.parse(body).Ratings[2].Value +
+				"\nCountry of the movie was produced: " + JSON.parse(body).Country +
+				"\nLanguage of the movie: " + JSON.parse(body).Language +
+				"\nPlot of the movie: " + JSON.parse(body).Plot +
+				"\nActors in the movie: " + JSON.parse(body).Actors, function(err) {
+				if (err) {
+					console.log(err);
+				}
+				else {
+					console.log("You added your info!");
+				}
+			});
 		}
 
 	});
